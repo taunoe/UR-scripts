@@ -25,11 +25,12 @@ rz = 0.38
 #pose = f"({x}, {y}, {z}, {rx},{ry},{rz})\n"
 
 poses_index = 0
+num_of_poses = 4
 poses = [
-    (-0.05, -0.25, 0.15, -0.01, 3.11, 0,38),
-    (0.05, -0.13, -0.15, 0.05, 3.10, 0.35),
-    (0.15, -0.05, 0.08, 0.11, 2.90, 0.30),
-    (-0.14, -0.20, -0.13, -0.18, 3.15, 0.20)
+    "(-0.05, -0.25, 0.15, -0.01, 3.11, 0.38)\n",
+    "(0.05, -0.13, -0.15, 0.05, 3.10, 0.35)\n",
+    "(0.15, -0.05, 0.08, 0.11, 2.90, 0.30)\n",
+    "(-0.14, -0.20, -0.13, -0.18, 3.15, 0.20)\n"
 ]
 
 def main():
@@ -48,18 +49,18 @@ def main():
         pose = f"({x}, {y}, {z}, {rx},{ry},{rz})\n"
 
         server.send("Cognex".encode(FORMAT))
-        print("Saadan")
 
         while connected:
             msg_in = server.recv(SIZE).decode(FORMAT)
 
             if msg_in == "urready":
-                print(f"Server saatis: {msg_in}")
-                print(f"Saadan vastu: {poses[poses_index]}")
-                poses_index += 1
-                if poses_index > len(pose):
+                if poses_index >= num_of_poses:
                     poses_index = 0
-                server.send(pose.encode(FORMAT))
+                print(f"Server saatis: {msg_in}")
+                print(f"Index: {poses_index}")
+                print(f"Saadan vastu: {poses[poses_index]}")
+                server.send(poses[poses_index].encode(FORMAT))
+                poses_index += 1
             else:
                 print(f"Server saatis: {msg_in}")
     except:

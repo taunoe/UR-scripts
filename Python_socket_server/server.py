@@ -34,7 +34,7 @@ z  = 0.15
 rx = -0.01
 ry = 3.11
 rz = 0.38
-#pose = f"({x}, {y}, {z}, {rx},{ry},{rz})\n"
+pose = "(-0.13, -0.20, -0.13, -0.18, 3.15, 0.20)\n"
 
 
 def list_to_dict(l):
@@ -50,7 +50,7 @@ ur_id = 0
 cognex_id = 0
 
 def handle_client(client, addr):
-    global x, ur_id, cognex_id
+    global x, ur_id, cognex_id, pose
 
     clients.append(client)
 
@@ -77,21 +77,20 @@ def handle_client(client, addr):
             elif msg_in == MSG_NEWPOSE:
                 # Saadame robotile uue pose
                 print(f"UR {addr} küsis: {msg_in}")
-                x = x + 0.01
-                pose = f"({x}, {y}, {z}, {rx},{ry},{rz})\n"
-                send_msg = pose
                 print(f"Server saadab: {pose}")
-                clients[ur_id].send(send_msg.encode(FORMAT))
+                clients[ur_id].send(pose.encode(FORMAT))
                 #client.send(send_msg.encode(FORMAT))
             elif msg_in == "urready":
                 # UR on valmis, Cognex tee pilti
-                print("UR on valmis")
+                print("UR on valmis. Saadan Cognexile.")
                 send_msg = "urready"
                 clients[cognex_id].send(send_msg.encode(FORMAT))
             elif msg_in == "Cognex":
                 print(f"Cognex ühendatud")
             else:
-                print(f"Klient saatis {msg_in}")
+                # Uus pose
+                print(f"...Klient {addr} saatis: {msg_in}")
+                pose = msg_in
 
     client.close()
     print("Close connection")
