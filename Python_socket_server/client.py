@@ -24,35 +24,46 @@ ry = 3.11
 rz = 0.38
 #pose = f"({x}, {y}, {z}, {rx},{ry},{rz})\n"
 
+poses_index = 0
+poses = [
+    (-0.05, -0.25, 0.15, -0.01, 3.11, 0,38),
+    (0.05, -0.13, -0.15, 0.05, 3.10, 0.35),
+    (0.15, -0.05, 0.08, 0.11, 2.90, 0.30),
+    (-0.14, -0.20, -0.13, -0.18, 3.15, 0.20)
+]
+
 def main():
     global x, y, z, rx, ry, rz
+    global poses, poses_index
 
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.connect((SERVER_IP, SERVER_PORT))
-    print(f"Connected to server at {SERVER_IP}:{SERVER_PORT}")
+    for x in poses:
+        print(x)
 
-    connected = True
-    pose = f"({x}, {y}, {z}, {rx},{ry},{rz})\n"
+    try:
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server.connect((SERVER_IP, SERVER_PORT))
+        print(f"Connected to server at {SERVER_IP}:{SERVER_PORT}")
 
-    server.send("Cognex".encode(FORMAT))
-    print("Saadan")
+        connected = True
+        pose = f"({x}, {y}, {z}, {rx},{ry},{rz})\n"
 
-    while connected:
-        msg_in = server.recv(SIZE).decode(FORMAT)
+        server.send("Cognex".encode(FORMAT))
+        print("Saadan")
 
-        if msg_in == "urready":
-            print(f"Server saatis: {msg_in}")
-            print(f"Saadan vastu: {pose}")
-            server.send(pose.encode(FORMAT))
-        else:
-            print(f"Server saatis: {msg_in}")
+        while connected:
+            msg_in = server.recv(SIZE).decode(FORMAT)
 
-
-        #if msg == DISCONNECT_MSG:
-        #    connected = False
-        #else:
-        #    msg = client.recv(SIZE).decode(FORMAT)
-        #    print(f"[SERVER] {msg}")
+            if msg_in == "urready":
+                print(f"Server saatis: {msg_in}")
+                print(f"Saadan vastu: {poses[poses_index]}")
+                poses_index += 1
+                if poses_index > len(pose):
+                    poses_index = 0
+                server.send(pose.encode(FORMAT))
+            else:
+                print(f"Server saatis: {msg_in}")
+    except:
+        print("Ei saa serveriga ühendust")
 
 
 
