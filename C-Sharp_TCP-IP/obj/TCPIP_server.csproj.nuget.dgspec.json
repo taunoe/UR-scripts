@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\UR_scripts\\TCP-IP\\TCPIP_server\\TCPIP_server.csproj": {}
+    "C:\\Users\\TaunoErik\\GitHub\\Github\\UR-scripts\\C-Sharp_TCP-IP\\TCPIP_server.csproj": {}
   },
   "projects": {
-    "C:\\UR_scripts\\TCP-IP\\TCPIP_server\\TCPIP_server.csproj": {
+    "C:\\Users\\TaunoErik\\GitHub\\Github\\UR-scripts\\C-Sharp_TCP-IP\\TCPIP_server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\UR_scripts\\TCP-IP\\TCPIP_server\\TCPIP_server.csproj",
+        "projectUniqueName": "C:\\Users\\TaunoErik\\GitHub\\Github\\UR-scripts\\C-Sharp_TCP-IP\\TCPIP_server.csproj",
         "projectName": "TCPIP_server",
-        "projectPath": "C:\\UR_scripts\\TCP-IP\\TCPIP_server\\TCPIP_server.csproj",
+        "projectPath": "C:\\Users\\TaunoErik\\GitHub\\Github\\UR-scripts\\C-Sharp_TCP-IP\\TCPIP_server.csproj",
         "packagesPath": "C:\\Users\\TaunoErik\\.nuget\\packages\\",
-        "outputPath": "C:\\UR_scripts\\TCP-IP\\TCPIP_server\\obj\\",
+        "outputPath": "C:\\Users\\TaunoErik\\GitHub\\Github\\UR-scripts\\C-Sharp_TCP-IP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\TaunoErik\\AppData\\Roaming\\NuGet\\NuGet.Config"

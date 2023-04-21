@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TCPIP_server
-build_property.ProjectDir = c:\UR_scripts\TCP-IP\TCPIP_server\
+build_property.ProjectDir = c:\Users\TaunoErik\GitHub\Github\UR-scripts\C-Sharp_TCP-IP\

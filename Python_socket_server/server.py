@@ -1,6 +1,11 @@
 # Multithread Socket Server
-# 20.04.2023
+# Stared: 20.04.2023
+# Edited: 21.04.2023
 # Tauno Erik
+
+# Two clients:
+#   1. Universal Robot
+#   2. Cognex Designer
 
 import socket
 import threading
@@ -8,33 +13,87 @@ import signal
 import sys
 
 
-#SERVER_IP = socket.gethostbyname(socket.gethostname())
-SERVER_IP = '127.0.1.1'
-SERVER_PORT = 50001
+SERVER_IP = socket.gethostbyname(socket.gethostname())
+#SERVER_IP = '127.0.1.1'
+SERVER_PORT = 50000
 
 SIZE = 1024
-FORMAT = "utf-8"
-DISCONNECT_MSG = "!DISCONNECT"
+FORMAT = "ASCII" #"utf-8"
+
+MSG_DISCONNECT = "!DISCONNECT"
+MSG_NEWPOSE    = "newpose"
+MSG_UR_READY   = "urready"
 
 
-def handle_client(client_socket, addr):
-    print("Client" + addr[0] + ":" + addr[1] + "connected.")
+# UR pose
+x  = -0.05
+y  = -0.25
+z  = 0.15
+rx = -0.01
+ry = 3.11
+rz = 0.38
+#pose = f"({x}, {y}, {z}, {rx},{ry},{rz})\n"
+
+
+def list_to_dict(l):
+  assert type(l) is list
+  return {'x' : l[0], 'y' : l[1], 'z' : l[2], 'rx' : l[3], 'ry' : l[4], 'rz' : l[5]}
+
+def dict_to_list(p):
+  assert type(p) is dict
+  return [p['x'], p['y'], p['z'], p['rx'], p['ry'], p['rz']]
+
+clients = []
+ur_id = 0
+cognex_id = 0
+
+def handle_client(client, addr):
+    clients.append(client)
+
+    global x, ur_id, cognex_id
+
+    print("Client " + addr[0] + ":" + str(addr[1]) + " connected.")
 
     connected = True
 
+
     while connected:
-        msg = client_socket.recv(SIZE).decode(FORMAT)
+        msg_in = client.recv(SIZE).decode(FORMAT)
 
-        if msg == DISCONNECT_MSG:
-            connected = False
+        if msg_in != "":
+            if msg_in == "ur_id":
+                # Registreerime roboti klient ID
+                print(f"UR index {clients.index(client)}")
+                ur_id = clients.index(client)
+                if ur_id == 0:
+                    cognex_id = 1
+                else:
+                    cognex_id = 0
+            elif msg_in == MSG_DISCONNECT:
+                # Ühendame kliendi lahti
+                print(f"Klient {addr} saatis: {msg_in}")
+                connected = False
+            elif msg_in == MSG_NEWPOSE:
+                # Saadame robotile uue pose
+                print(f"UR {addr} küsis: {msg_in}")
+                x = x + 0.01
+                pose = f"({x}, {y}, {z}, {rx},{ry},{rz})\n"
+                send_msg = pose
+                print(f"Server saatis: {pose}")
+                clients[ur_id].send(send_msg.encode(FORMAT))
+                #client.send(send_msg.encode(FORMAT))
+            elif msg_in == "urready":
+                # UR on valmis, Cognex tee pilti
+                print("UR on valmis")
+                send_msg = "urready"
+                clients[cognex_id].send(send_msg.encode(FORMAT))
+            elif msg_in == "Cognex":
+                print(f"Cognex ühendatud")
+            else:
+                print(f"Klient saatis {msg_in}")
 
-        print(f"[{addr}] {msg}")
-        # msg = f"Msg received: {msg}"
-
-        send_msg = "(0.0, 0.1, 0.2, 0.3, 0.4, 0.5)"
-        client_socket.send(send_msg.encode(FORMAT))
-
-    client_socket.close()
+    client.close()
+    print("Close connection")
 
 
 def main():
@@ -44,6 +103,7 @@ def main():
 
     print(f"Server {SERVER_IP}:{SERVER_PORT}")
 
+    
     while True:
         conn, addr = server.accept()
         thread = threading.Thread(target=handle_client, args=(conn, addr))
@@ -51,7 +111,10 @@ def main():
 
         print(f"[ACTIVE CONNECTIONS] {threading.active_count() - 1}")
 
+    
 
+
+### CTRL+c
 
 interrupt_read, interrupt_write = socket.socketpair()
 
@@ -64,5 +127,8 @@ def handle_signal(signum, frame):
 signal.signal(signal.SIGINT, handle_signal)
 
 
+
 if __name__ == "__main__":
     main()
+    
+    

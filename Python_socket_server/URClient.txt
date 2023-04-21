@@ -1,0 +1,24 @@
+ Program
+   Variables Setup
+   BeforeStart
+     open≔socket_open("192.168.98.23",50000)
+     Loop open≟ False 
+       open≔socket_open("192.168.98.23",50000)
+     socket_send_string("ur_id")
+     targetPos≔p[0,0,0,0,0,0]
+     counter≔0
+   Robot Program
+     socket_send_string("newpose")
+     receiveFromServ≔socket_read_ascii_float(6)
+     Loop receiveFromServ[0]≠6
+       Wait: 0.3
+       receiveFromServ≔socket_read_ascii_float(6)
+     Loop counter<6
+       targetPos[counter]=receiveFromServ[counter+1]
+       counter≔counter+1
+     MoveJ
+       targetPos
+       Wait: 0.1
+     counter≔0
+     socket_send_string("urready")
+     Wait: 2.0
