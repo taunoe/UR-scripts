@@ -13,8 +13,10 @@ import signal
 import sys
 
 
+
+# If runs in Cognex Designer PC:
+#SERVER_IP = '192.168.0.101'
 SERVER_IP = socket.gethostbyname(socket.gethostname())
-#SERVER_IP = '127.0.1.1'
 SERVER_PORT = 50000
 
 SIZE = 1024
@@ -48,14 +50,13 @@ ur_id = 0
 cognex_id = 0
 
 def handle_client(client, addr):
-    clients.append(client)
-
     global x, ur_id, cognex_id
+
+    clients.append(client)
 
     print("Client " + addr[0] + ":" + str(addr[1]) + " connected.")
 
     connected = True
-
 
     while connected:
         msg_in = client.recv(SIZE).decode(FORMAT)
@@ -79,7 +80,7 @@ def handle_client(client, addr):
                 x = x + 0.01
                 pose = f"({x}, {y}, {z}, {rx},{ry},{rz})\n"
                 send_msg = pose
-                print(f"Server saatis: {pose}")
+                print(f"Server saadab: {pose}")
                 clients[ur_id].send(send_msg.encode(FORMAT))
                 #client.send(send_msg.encode(FORMAT))
             elif msg_in == "urready":
