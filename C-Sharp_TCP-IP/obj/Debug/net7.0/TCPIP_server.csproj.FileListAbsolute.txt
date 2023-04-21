@@ -1,0 +1,20 @@
+E:\OneDrive - Võrumaa Kutsehariduskeskus\Töölaud\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.csproj.AssemblyReference.cache
+E:\OneDrive - Võrumaa Kutsehariduskeskus\Töölaud\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.GeneratedMSBuildEditorConfig.editorconfig
+E:\OneDrive - Võrumaa Kutsehariduskeskus\Töölaud\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.AssemblyInfoInputs.cache
+E:\OneDrive - Võrumaa Kutsehariduskeskus\Töölaud\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.AssemblyInfo.cs
+E:\OneDrive - Võrumaa Kutsehariduskeskus\Töölaud\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.csproj.CoreCompileInputs.cache
+C:\UR_scripts\TCP-IP\TCPIP_server\bin\Debug\net7.0\TCPIP_server.exe
+C:\UR_scripts\TCP-IP\TCPIP_server\bin\Debug\net7.0\TCPIP_server.deps.json
+C:\UR_scripts\TCP-IP\TCPIP_server\bin\Debug\net7.0\TCPIP_server.runtimeconfig.json
+C:\UR_scripts\TCP-IP\TCPIP_server\bin\Debug\net7.0\TCPIP_server.dll
+C:\UR_scripts\TCP-IP\TCPIP_server\bin\Debug\net7.0\TCPIP_server.pdb
+C:\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.csproj.AssemblyReference.cache
+C:\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.GeneratedMSBuildEditorConfig.editorconfig
+C:\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.AssemblyInfoInputs.cache
+C:\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.AssemblyInfo.cs
+C:\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.csproj.CoreCompileInputs.cache
+C:\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.dll
+C:\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\refint\TCPIP_server.dll
+C:\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.pdb
+C:\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\TCPIP_server.genruntimeconfig.cache
+C:\UR_scripts\TCP-IP\TCPIP_server\obj\Debug\net7.0\ref\TCPIP_server.dll
